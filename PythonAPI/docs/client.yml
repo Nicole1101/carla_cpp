@@ -8,8 +8,9 @@
     # - DESCRIPTION ------------------------
     doc: >
       The Client connects CARLA to the server which runs the simulation. Both server and client contain a CARLA library (libcarla) with some differences that allow communication between them. Many clients can be created and each of these will connect to the RPC server inside the simulation to send commands. The simulation runs server-side. Once the connection is established, the client will only receive data retrieved from the simulation. Walkers are the exception. The client is in charge of managing pedestrians so, if you are running a simulation with multiple clients, some issues may arise. For example, if you spawn walkers through different clients, collisions may happen, as each client is only aware of the ones it is in charge of.
-
+#客户端将CARLA连接到运行模拟的服务器。服务器和客户端都包含一个CARLA库（libcarla），但存在一些差异，允许它们之间进行通信。可以创建许多客户端，每个客户端都将连接到模拟中的RPC服务器以发送命令。模拟在服务器端运行。一旦建立连接，客户端将只接收从模拟中检索到的数据。步行者是个例外。客户端负责管理行人，因此，如果您使用多个客户端运行模拟，可能会出现一些问题。例如，如果你通过不同的客户端生成步行者，可能会发生碰撞，因为每个客户端只知道它所负责的客户端。
         The client also has a recording feature that saves all the information of a simulation while running it. This allows the server to replay it at will to obtain information and experiment with it. [Here](adv_recorder.md) is some information about how to use this recorder.
+        #客户端还具有录制功能，可以在运行模拟时保存模拟的所有信息。这允许服务器随意回放以获取信息并进行实验。
     # - PROPERTIES -------------------------
     instance_variables:
     # - METHODS ----------------------------
@@ -582,36 +583,29 @@
       doc: >
         Sets the minimum distance in meters that vehicles have to keep with the rest. The distance is in meters and will affect the minimum moving distance. It is computed from center to center of the vehicle objects.
     # --------------------------------------
-    # 函数：设置车辆的期望速度
-    # 参数：
-    # - actor：要改变速度的车辆对象，类型为carla.Actor，代表那个速度即将被改变的车辆
-    # - speed：期望车辆达到并移动的速度值，类型为float
     - def_name: set_desired_speed
       params:
       - param_name: actor
-        type: carla.Actor # carla.Actor类型，对应的是要操作的车辆
+        type: carla.Actor
         doc: >
           Vehicle whose speed is being changed.
-      - param_name: speed # float类型，指定的目标速度
+      - param_name: speed
         type: float
         doc: >
           Desired speed at which the vehicle will move.
       doc: >
         Sets the speed of a vehicle to the specified value.
     # --------------------------------------
-    # 函数：启用或禁用混合物理模式
-    # - enabled：布尔类型，默认值为False，取值为True时启用混合物理模式，False时禁用
     - def_name: set_hybrid_physics_mode
       params:
       - param_name: enabled
-        type: bool # bool类型，控制混合物理模式的启用（True）或禁用（False），默认禁用
+        type: bool
         default: False
         doc: >
           If __True__, enables the hybrid physics.
       doc: >
         Enables or disables the hybrid physics mode. In this mode, vehicle's farther than a certain radius from the ego vehicle will have their physics disabled. Computation cost will be reduced by not calculating vehicle dynamics. Vehicles will be teleported.
     # --------------------------------------
-    # 设置混合物理模式的半径值
     - def_name: set_hybrid_physics_radius
       params:
       - param_name: r
